@@ -1,0 +1,39 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "OpenRouter Activity",
+        "description": "Voer je OpenRouter management API key in.",
+        "data": {
+          "management_api_key": "Management API key",
+          "scan_interval_minutes": "Polling interval (minuten)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Kan geen verbinding maken met OpenRouter.",
+      "invalid_auth": "Ongeldige API key.",
+      "unknown": "Onverwachte fout."
+    },
+    "abort": {
+      "single_instance_allowed": "Er kan maar een OpenRouter Activity configuratie actief zijn."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "OpenRouter Activity – instellingen",
+        "description": "Laat management API key leeg om deze te behouden. Huidige key: {current_key_hint}.",
+        "data": {
+          "management_api_key": "Nieuwe management API key (optioneel)",
+          "scan_interval_minutes": "Polling interval (minuten)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Kan geen verbinding maken met OpenRouter.",
+      "invalid_auth": "Ongeldige API key.",
+      "unknown": "Onverwachte fout."
+    }
+  }
+}

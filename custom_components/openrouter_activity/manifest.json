@@ -1,0 +1,13 @@
+{
+  "domain": "openrouter_activity",
+  "name": "OpenRouter Activity",
+  "version": "0.1.0",
+  "documentation": "https://github.com/jelger/ha-openrouter-activity",
+  "issue_tracker": "https://github.com/jelger/ha-openrouter-activity/issues",
+  "icon": "mdi:chart-timeline-variant",
+  "config_flow": true,
+  "iot_class": "cloud_polling",
+  "requirements": [],
+  "dependencies": [],
+  "codeowners": ["@jelger"]
+}

@@ -1,0 +1,39 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "OpenRouter Activity",
+        "description": "Enter your OpenRouter management API key.",
+        "data": {
+          "management_api_key": "Management API key",
+          "scan_interval_minutes": "Polling interval (minutes)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to OpenRouter.",
+      "invalid_auth": "Invalid API key.",
+      "unknown": "Unexpected error."
+    },
+    "abort": {
+      "single_instance_allowed": "Only one OpenRouter Activity configuration is allowed."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "OpenRouter Activity – Settings",
+        "description": "Leave management API key empty to keep it unchanged. Current key: {current_key_hint}.",
+        "data": {
+          "management_api_key": "New management API key (optional)",
+          "scan_interval_minutes": "Polling interval (minutes)"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to OpenRouter.",
+      "invalid_auth": "Invalid API key.",
+      "unknown": "Unexpected error."
+    }
+  }
+}

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Background -->
+  <rect width="512" height="512" rx="80" fill="#0d1117"/>
+  <!-- OpenRouter-style O ring representing the platform -->
+  <circle cx="256" cy="185" r="110" fill="none" stroke="#3b82f6" stroke-width="26"/>
+  <!-- Small inner dot / activity indicator inside the ring -->
+  <circle cx="256" cy="185" r="18" fill="#60a5fa"/>
+  <!-- Activity bar chart (spend / requests / tokens per model as on dashboard) -->
+  <!-- 7 bars, evenly spaced, varying heights from bottom=460 upward -->
+  <rect x="38"  y="360" width="52" height="100" rx="7" fill="#1d4ed8"/>
+  <rect x="102" y="328" width="52" height="132" rx="7" fill="#3b82f6"/>
+  <rect x="166" y="298" width="52" height="162" rx="7" fill="#60a5fa"/>
+  <rect x="230" y="340" width="52" height="120" rx="7" fill="#3b82f6"/>
+  <rect x="294" y="308" width="52" height="152" rx="7" fill="#60a5fa"/>
+  <rect x="358" y="348" width="52" height="112" rx="7" fill="#f59e0b"/>
+  <rect x="422" y="322" width="52" height="138" rx="7" fill="#3b82f6"/>
+</svg>

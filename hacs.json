@@ -1,0 +1,8 @@
+{
+  "name": "OpenRouter Activity",
+  "content_in_root": false,
+  "country": "NL",
+  "render_readme": true,
+  "domains": ["sensor"],
+  "homeassistant": "2024.6.0"
+}
