@@ -12,6 +12,7 @@ This integration adds sensors with information about your OpenRouter activity. C
 | OpenRouter Total Credits | USD | Total purchased credits value reported by OpenRouter |
 | OpenRouter Used Credits | USD | Total used credits value reported by OpenRouter |
 | OpenRouter Remaining Credits | USD | `total_credits - total_usage`, never below 0 |
+| OpenRouter Current Day Spend | USD | Credits spent in the current day, derived from used-credits delta |
 | OpenRouter Current Month Spend | USD | Credits spent in the current month, derived from used-credits delta |
 
 All monetary values are rounded to 2 decimals.
@@ -57,7 +58,17 @@ Default polling interval is 30 minutes.
 You can edit both values later via the integration settings (gear icon). The integration reloads automatically after saving.
 
 
-### Current Month Spend sensor attributes
+### Spend sensor attributes
+
+#### Current Day Spend
+
+| Attribute | Description |
+|---|---|
+| `baseline_day` | Baseline day in `YYYY-MM-DD` format |
+| `baseline_used_credits_daily` | Stored used-credits value at day start |
+| `current_total_usage` | Latest total used credits from OpenRouter |
+
+#### Current Month Spend
 
 | Attribute | Description |
 |---|---|
@@ -65,7 +76,7 @@ You can edit both values later via the integration settings (gear icon). The int
 | `baseline_used_credits` | Stored used-credits value at month start |
 | `current_total_usage` | Latest total used credits from OpenRouter |
 
-## How Current Month Spend Is Calculated
+## How Spend Is Calculated
 
 This integration does not use activity/generation endpoints anymore.
 
@@ -73,22 +84,25 @@ At each refresh:
 
 1. Call `GET /api/v1/credits`
 2. Read `total_usage`
-3. Load or maintain a persisted monthly baseline:
+3. Load or maintain persisted daily and monthly baselines:
+   - `baseline_day`
+   - `baseline_used_credits_daily`
    - `baseline_month`
    - `baseline_used_credits`
-4. If month changed, reset baseline to current `total_usage`
+4. If day or month changed, reset the corresponding baseline to current `total_usage`
 5. Compute:
+   - `current_day_spend = max(total_usage - baseline_used_credits_daily, 0)`
    - `current_month_spend = max(total_usage - baseline_used_credits, 0)`
 
 The baseline is stored persistently in Home Assistant storage, so it survives restarts.
 
 ### First run behavior
 
-If you install mid-month, the baseline is initialized with the current `total_usage`. That means Current Month Spend starts at 0 from that moment and accumulates forward.
+If you install mid-day or mid-month, the relevant baseline is initialized with the current `total_usage`. That means Current Day Spend and Current Month Spend start at 0 from that moment and accumulate forward.
 
 ## Notes
 
 - Single-instance integration (one config entry)
 - Polling options: 15, 30, 60, 120, 360, 1440 minutes (default: 30)
-- Current month logic uses Home Assistant local timezone
+- Current day and month logic use Home Assistant local timezone
 - Monetary values are represented in USD

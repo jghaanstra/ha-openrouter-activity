@@ -22,5 +22,7 @@ STORAGE_VERSION = 1
 
 PLATFORMS: list[Platform] = [Platform.SENSOR]
 
+ATTR_BASELINE_DAY = "baseline_day"
 ATTR_BASELINE_MONTH = "baseline_month"
+ATTR_BASELINE_USED_CREDITS_DAILY = "baseline_used_credits_daily"
 ATTR_BASELINE_USED_CREDITS = "baseline_used_credits"

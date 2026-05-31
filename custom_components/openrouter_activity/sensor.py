@@ -12,8 +12,10 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .const import (
+    ATTR_BASELINE_DAY,
     ATTR_BASELINE_MONTH,
     ATTR_BASELINE_USED_CREDITS,
+    ATTR_BASELINE_USED_CREDITS_DAILY,
     COORDINATOR,
     DOMAIN,
 )
@@ -63,6 +65,14 @@ SENSOR_DESCRIPTIONS: tuple[OpenRouterSensorDescription, ...] = (
         native_unit_of_measurement="USD",
         state_class=SensorStateClass.MEASUREMENT,
         icon="mdi:cash-check",
+    ),
+    OpenRouterSensorDescription(
+        key="current_day_spend",
+        name="OpenRouter Current Day Spend",
+        value_fn=lambda data: _round2(data.get("daily", {}).get("current_day_spend")),
+        native_unit_of_measurement="USD",
+        state_class=SensorStateClass.MEASUREMENT,
+        icon="mdi:calendar-today",
     ),
     OpenRouterSensorDescription(
         key="current_month_spend",
@@ -118,9 +128,15 @@ class OpenRouterActivitySensor(CoordinatorEntity[OpenRouterDataUpdateCoordinator
     def extra_state_attributes(self) -> dict[str, Any]:
         """Return extra state attributes."""
         data = self.coordinator.data or {}
+        daily = data.get("daily", {})
         monthly = data.get("monthly", {})
 
         attrs: dict[str, Any] = {}
+
+        if self.entity_description.key == "current_day_spend":
+            attrs[ATTR_BASELINE_DAY] = daily.get(ATTR_BASELINE_DAY)
+            attrs[ATTR_BASELINE_USED_CREDITS_DAILY] = daily.get(ATTR_BASELINE_USED_CREDITS_DAILY)
+            attrs["current_total_usage"] = daily.get("current_total_usage")
 
         if self.entity_description.key == "current_month_spend":
             attrs[ATTR_BASELINE_MONTH] = monthly.get(ATTR_BASELINE_MONTH)
